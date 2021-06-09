@@ -45,7 +45,7 @@ export default {
                 this.albums = exportAxios.data.response;
                 setTimeout( () => {
                     this.loading = false;
-                }, 3000)
+                }, 2800)
                 }
             )
     }
@@ -78,7 +78,7 @@ ul {
             cursor: pointer;
             img {
                 width: 95%;
-                height: 120px
+                height: 120px;
             }
             h2  {
                 color: white;
