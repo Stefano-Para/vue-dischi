@@ -21,7 +21,7 @@ import Albums from '../components/Albums.vue'
 
 <style lang="scss">
     main {
-        height: calc(100vh - 60px);
+        padding: 10px;
         background-color: #1E2D3B;
     }
     .container_bg {
