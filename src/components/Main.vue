@@ -23,10 +23,11 @@ import Albums from '../components/Albums.vue'
     main {
         padding: 10px;
         background-color: #1E2D3B;
+        height: 100%;
     }
     .container_bg {
         width: 60%;
-        height: 100%;
+        height: calc(100vh - 80px);
         margin: 0 auto;
     }
 </style>

@@ -1,35 +1,41 @@
 <template>
-    <div class="container_albums">
-            <ul>
-                <li v-for="(album, index) in albums"
-                :key="index">
-                    <a href="">
-                        <img :src="album.poster" alt="">
-                        <h2>
-                            {{ album.title }}
-                        </h2>
-                        <h4>
-                            {{ album.author }}
-                        </h4>
-                        <h5>
-                            {{ album.year }}
-                        </h5>
-                    </a>
-                </li>
-            </ul>
-    </div>
+        <div v-if="!loading" class="container_albums">
+                <ul>
+                    <li v-for="(album, index) in albums"
+                    :key="index">
+                        <a href="">
+                            <img :src="album.poster" alt="">
+                            <h2>
+                                {{ album.title }}
+                            </h2>
+                            <h4>
+                                {{ album.author }}
+                            </h4>
+                            <h5>
+                                {{ album.year }}
+                            </h5>
+                        </a>
+                    </li>
+                </ul>
+        </div>
+        <Loader v-else />
 </template>
 
 <script>
 // senza tilde perchè mi porta automaticamente in node_modus 
 import axios from 'axios'
+import Loader from './Loader.vue'
 
 
 export default {
     name: 'Albums',
+    components: {
+    Loader
+    },
     data () {
         return {
-            albums: []
+            albums: [],
+            loading: true
         }
     },
     created () {
@@ -37,7 +43,9 @@ export default {
             .get ('https://flynn.boolean.careers/exercises/api/array/music')
             .then ( (exportAxios) => {
                 this.albums = exportAxios.data.response;
-                console.log(exportAxios)
+                setTimeout( () => {
+                    this.loading = false;
+                }, 3000)
                 }
             )
     }
@@ -46,7 +54,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.loader {
+    color: white;
+}
 ul {
     display: flex;
     flex-wrap: wrap;
