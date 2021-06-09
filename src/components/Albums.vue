@@ -15,118 +15,6 @@
                         </h5>
                     </a>
                 </li>
-                <li>
-                    <a href="">
-                        <img src="../assets/spotify.png" alt="">
-                        <h2>
-                            Album
-                        </h2>
-                        <h4>
-                            Artista
-                        </h4>
-                        <h5>
-                            Data
-                        </h5>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="../assets/spotify.png" alt="">
-                        <h2>
-                            Album
-                        </h2>
-                        <h4>
-                            Artista
-                        </h4>
-                        <h5>
-                            Data
-                        </h5>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="../assets/spotify.png" alt="">
-                        <h2>
-                            Album
-                        </h2>
-                        <h4>
-                            Artista
-                        </h4>
-                        <h5>
-                            Data
-                        </h5>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="../assets/spotify.png" alt="">
-                        <h2>
-                            Album
-                        </h2>
-                        <h4>
-                            Artista
-                        </h4>
-                        <h5>
-                            Data
-                        </h5>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="../assets/spotify.png" alt="">
-                        <h2>
-                            Album
-                        </h2>
-                        <h4>
-                            Artista
-                        </h4>
-                        <h5>
-                            Data
-                        </h5>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="../assets/spotify.png" alt="">
-                        <h2>
-                            Album
-                        </h2>
-                        <h4>
-                            Artista
-                        </h4>
-                        <h5>
-                            Data
-                        </h5>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="../assets/spotify.png" alt="">
-                        <h2>
-                            Album
-                        </h2>
-                        <h4>
-                            Artista
-                        </h4>
-                        <h5>
-                            Data
-                        </h5>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="../assets/spotify.png" alt="">
-                        <h2>
-                            Album
-                        </h2>
-                        <h4>
-                            Artista
-                        </h4>
-                        <h5>
-                            Data
-                        </h5>
-                    </a>
-                </li>
             </ul>
     </div>
 </template>
@@ -140,15 +28,15 @@ import axios from 'axios'
         name: 'Albums',
         data () {
             return {
-
+              array: []  
             }
         },
         created () {
             axios
                 .get ('https://flynn.boolean.careers/exercises/api/array/music')
-                .then ( (callResponse) => {
-                    this.
-                    console.log(callResponse)
+                .then ( (exportAxios) => {
+                    exportAxios.data.response
+                    console.log(exportAxios)
                     }
                 )
         }
