@@ -28,6 +28,5 @@ import Albums from '../components/Albums.vue'
         width: 60%;
         height: 100%;
         margin: 0 auto;
-        background-color: orange;
     }
 </style>

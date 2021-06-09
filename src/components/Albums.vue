@@ -1,17 +1,18 @@
 <template>
     <div class="container_albums">
             <ul>
-                <li>
+                <li v-for="(album, index) in albums"
+                :key="index">
                     <a href="">
-                        <img src="../assets/spotify.png" alt="">
+                        <img :src="album.poster" alt="">
                         <h2>
-                            Album
+                            {{ album.title }}
                         </h2>
                         <h4>
-                            Artista
+                            {{ album.author }}
                         </h4>
                         <h5>
-                            Data
+                            {{ album.year }}
                         </h5>
                     </a>
                 </li>
@@ -24,60 +25,70 @@
 import axios from 'axios'
 
 
-    export default {
-        name: 'Albums',
-        data () {
-            return {
-              array: []  
-            }
-        },
-        created () {
-            axios
-                .get ('https://flynn.boolean.careers/exercises/api/array/music')
-                .then ( (exportAxios) => {
-                    exportAxios.data.response
-                    console.log(exportAxios)
-                    }
-                )
+export default {
+    name: 'Albums',
+    data () {
+        return {
+            albums: []
         }
+    },
+    created () {
+        axios
+            .get ('https://flynn.boolean.careers/exercises/api/array/music')
+            .then ( (exportAxios) => {
+                this.albums = exportAxios.data.response;
+                console.log(exportAxios)
+                }
+            )
     }
+}
     
 </script>
 
 <style lang="scss" scoped>
-    ul {
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0;
+    li {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        padding: 0;
-        li {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            list-style: none;
-            background-color: blue;
-            width: 20%;
-            padding: 15px;
-            margin: 15px;
-            text-align: center;
-            a {
-                text-decoration: none;
-                cursor: pointer;
-                img {
-                    width: 80px;
-                }
-                h2  {
-                    color: white;
-                }
-                h4 {
-                    color: lightgrey;
-                }
-                h5 {
-                    color: grey;
-                }
+        flex-direction: column;
+        align-items: center;
+        list-style: none;
+        background-color: #2E3A46;
+        width: 16%;
+        height: 270px;
+        padding: 15px;
+        margin: 15px;
+        text-align: center;
+        a {
+            text-decoration: none;
+            cursor: pointer;
+            img {
+                width: 95%;
+                height: 120px
+            }
+            h2  {
+                color: white;
+                margin: 10px 0 0 0;
+                text-transform: uppercase;
+                font-size: 16px;
+            }
+            h4 {
+                margin: 20px 0 0 0;
+                font-size: 12px;
+                color: lightgrey;
+            }
+            h5 {
+                margin: 0;
+                font-size: 12px;
+                color: grey;
             }
         }
     }
+}
     
     
 </style>
