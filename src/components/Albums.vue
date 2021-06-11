@@ -1,5 +1,5 @@
 <template>
-        <div v-if="!loading" class="container_albums">
+        <div class="container_albums">
                 <ul>
                     <li v-for="(album, index) in albums"
                     :key="index">
@@ -18,24 +18,24 @@
                     </li>
                 </ul>
         </div>
-        <Loader v-else />
+
 </template>
 
 <script>
 // senza tilde perchè mi porta automaticamente in node_modus 
 import axios from 'axios'
-import Loader from './Loader.vue'
+
 
 
 export default {
     name: 'Albums',
     components: {
-    Loader
+
     },
     data () {
         return {
             albums: [],
-            loading: true
+            genres: [],
         }
     },
     created () {
@@ -43,9 +43,15 @@ export default {
             .get ('https://flynn.boolean.careers/exercises/api/array/music')
             .then ( (exportAxios) => {
                 this.albums = exportAxios.data.response;
-                setTimeout( () => {
-                    this.loading = false;
-                }, 2800)
+                // ciclo tutti i dischi 
+                this.albums.forEach(
+                    (element) => {
+                        if (!this.genres.includes(element.genre)) {
+                            this.genres.push(element.genre);
+                        }
+                    }
+                );
+                this.$emit('dataReady', this.genres, this.authors);            
                 }
             )
     }
@@ -77,8 +83,8 @@ ul {
             text-decoration: none;
             cursor: pointer;
             img {
-                width: 95%;
-                height: 120px;
+                max-width: 105px;
+                max-height: 120px;
             }
             h2  {
                 color: white;

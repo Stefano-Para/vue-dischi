@@ -2,6 +2,11 @@
 
     <header>
             <img src="../assets/spotify.png" alt="">
+
+            <select placeholder="" name="" id="selezione">
+                <option value="">Seleziona un genere</option>
+                
+            </select>
     </header>
 </template>
 
@@ -19,6 +24,7 @@
         padding: 10px;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         background-color: #2E3A46;
         height: 60px;
         width: 100%;

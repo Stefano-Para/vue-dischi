@@ -2,7 +2,16 @@
 
     <main>
         <div class="container_bg">
-            <Albums />
+
+            <Albums
+            v-if="!loading"
+            
+            :selectedGenre="currentGenre"
+            @dataReady="setData"
+            />
+
+            <Loader v-else />
+
         </div>
     </main>
 
@@ -10,12 +19,34 @@
 
 <script>
 import Albums from '../components/Albums.vue'
-    export default {
-        name: 'Main',
-        components: {
-            Albums
+import Loader from './Loader.vue'
+
+export default {
+    name: 'Main',
+    components: {
+        Albums,
+        Loader,
+    },
+    data () {
+        return {
+            loading: true,
+            AllGenres: [],
+            AllAuthors: [],
+            currentGenre: ''
         }
+    },
+    setData: function(genresArray) {
+        this.AllGenres = genresArray;
+    },
+    updateSelectedGenre: function() {
+        this.currentGenre = newGenre;
+    },
+    created () {
+        setTimeout( () => {
+                    this.loading = false;
+                }, 100)
     }
+}
 </script>
 
 
