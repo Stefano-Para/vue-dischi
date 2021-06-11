@@ -5,9 +5,10 @@
 
             <Albums
             v-if="!loading"
-            
-            :selectedGenre="currentGenre"
-            @dataReady="setData"
+
+            :selectedGenre="selectedGenre"
+            @changedGenre="updateCurrentGenre"
+            @genreReady="setData"
             />
 
             <Loader v-else />
@@ -23,6 +24,9 @@ import Loader from './Loader.vue'
 
 export default {
     name: 'Main',
+    props: {
+        selectedGenre: String
+    },
     components: {
         Albums,
         Loader,
@@ -31,15 +35,21 @@ export default {
         return {
             loading: true,
             AllGenres: [],
-            AllAuthors: [],
-            currentGenre: ''
+            // AllAuthors: [],
+            currentGenreDentroMain: '',
         }
     },
-    setData: function(genresArray) {
-        this.AllGenres = genresArray;
-    },
-    updateSelectedGenre: function() {
-        this.currentGenre = newGenre;
+    methods: {
+        setData: function(genresArray) {
+            this.AllGenres = genresArray;
+            // spostamento in app.vue
+            this.$emit('genreReady', genresArray);
+        },
+        // questo è inutile perchè lo si fa solo in caso di emit
+        updateCurrentGenre: function (newGenre) {
+          this.currentGenre = newGenre;
+          console.log(newGenre)
+        }
     },
     created () {
         setTimeout( () => {

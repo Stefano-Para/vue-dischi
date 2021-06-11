@@ -3,9 +3,16 @@
     <header>
             <img src="../assets/spotify.png" alt="">
 
-            <select placeholder="" name="" id="selezione">
-                <option value="">Seleziona un genere</option>
-                
+            <!-- perchè selected genre prende direttamente il genere selezionato? è perchè sotto seleziona da { genre }? -->
+            <select
+            v-model="selectedGenre"
+            @change="$emit('changedGenre', selectedGenre)"
+            >
+                <option value="">Seleziona un Genere</option>
+                <option
+                v-for="(genre, index) in genres"
+                :key="index"
+                :value="genre">{{ genre }}</option>
             </select>
     </header>
 </template>
@@ -13,7 +20,15 @@
 <script>
 
     export default {
-        name: 'Header'
+        name: 'Header',
+        data: function() {
+            return {
+            selectedGenre: ''
+            }
+        },
+        props: {
+            "genres": Array
+        }
     }
 </script>
 

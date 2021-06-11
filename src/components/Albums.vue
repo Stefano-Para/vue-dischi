@@ -1,22 +1,23 @@
 <template>
         <div class="container_albums">
-                <ul>
-                    <li v-for="(album, index) in albums"
-                    :key="index">
-                        <a href="">
-                            <img :src="album.poster" alt="">
-                            <h2>
-                                {{ album.title }}
-                            </h2>
-                            <h4>
-                                {{ album.author }}
-                            </h4>
-                            <h5>
-                                {{ album.year }}
-                            </h5>
-                        </a>
-                    </li>
-                </ul>
+            <ul>
+                <li v-for="(album, index) in filteredAlbums"
+                :key="index">
+                    {{ selectedGenre }}
+                    <a href="">
+                        <img :src="album.poster" alt="">
+                        <h2>
+                            {{ album.title }}
+                        </h2>
+                        <h4>
+                            {{ album.author }}
+                        </h4>
+                        <h5>
+                            {{ album.year }}
+                        </h5>
+                    </a>
+                </li>
+            </ul>
         </div>
 
 </template>
@@ -29,8 +30,19 @@ import axios from 'axios'
 
 export default {
     name: 'Albums',
-    components: {
-
+    props: {
+        selectedGenre: String
+    },
+    computed: {
+        filteredAlbums: function () {
+            if (this.selectedGenre == "") {
+                return this.albums;
+            }
+            
+            return this.albums.filter(
+                element => element.genre == this.selectedGenre
+            );
+        }
     },
     data () {
         return {
@@ -51,7 +63,7 @@ export default {
                         }
                     }
                 );
-                this.$emit('dataReady', this.genres, this.authors);            
+                this.$emit('genreReady', this.genres);
                 }
             )
     }
@@ -66,7 +78,6 @@ export default {
 ul {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     padding: 0;
     li {
         display: flex;
